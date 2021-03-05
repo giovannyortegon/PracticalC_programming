@@ -1,0 +1,4 @@
+I am trying to create a sequential file. it is through C programming.It is very hot today.
+I have a cat. do you like animals? It might
+rain. Thank you. Bye
+
