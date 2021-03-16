@@ -22,12 +22,13 @@ void main(int argc, char *argv[])
 	fseek(fp, 0L, SEEK_END);
 	n = ftell(fp);
 	nol = n / sizeof(struct data);
+
 	printf("The content of random file in reverse order is: \n");
 
 	for (i = 1; i <= nol; i++)
 	{
 		fseek(fp, -sizeof(struct data) * i, SEEK_END);
-		fread(&line, sizeof(struct data), 1, fp);
+		fread(&line.str, sizeof(struct data), 1, fp);
 		puts(line.str);
 	}
 	fclose(fp);
