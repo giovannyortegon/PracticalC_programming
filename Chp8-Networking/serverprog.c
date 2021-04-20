@@ -3,12 +3,17 @@
 #include<netinet/in.h>
 #include<string.h>
 #include<arpa/inet.h>
+#include<unistd.h>
 
 int main()
 {
 	int serverSocket, toSend;
 	char str[255];
 	struct sockaddr_in server_Address;
+	struct sockaddr_in cin;
+	socklen_t len;
+
+	len = sizeof(struct sockaddr);
 
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -30,8 +35,12 @@ int main()
 	printf("Enter text to send to the client: ");
 	gets(str);
 
-	toSend = accept(serverSocket, (struct sockaddr *) NULL, NULL);
+	memset(&cin, '\0', sizeof(struct sockaddr));
+	toSend = accept(serverSocket, (struct sockaddr *)&cin, &len);
 	send(toSend, str, strlen(str), 0);
+
+	recv(serverSocket, str, 255, 0);
+	printf("Date return from client: %s\n", str);
 
 	close(serverSocket);
 	return(0);

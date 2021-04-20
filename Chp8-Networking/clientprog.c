@@ -3,10 +3,11 @@
 #include<netinet/in.h>
 #include<string.h>
 #include<arpa/inet.h>
+#include<unistd.h>
 
 int main()
 {
-	int clientSocket;
+	int clientSocket, ret;
 	char str[255];
 	struct sockaddr_in client_Address;
 	socklen_t address_size;
@@ -20,8 +21,10 @@ int main()
 	memset(client_Address.sin_zero, '\0', sizeof(client_Address.sin_zero));
 
 	address_size = sizeof(client_Address);
-	connect(clientSocket, (struct sockaddr *)&client_Address, address_size);
+	ret = connect(clientSocket, (struct sockaddr *)&client_Address, address_size);
 	recv(clientSocket, str, 255, 0);
+
+	send(clientSocket, str, 255, 0);
 
 	printf("Data received from server: %s\n", str);
 
