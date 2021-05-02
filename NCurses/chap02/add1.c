@@ -13,7 +13,7 @@ int main(void)
 		addch(*t);	/* put one char to curscr */
 		t++;		/* increment pointer */
 		refresh();	/* update the screen */
-		napms(200);	/* delayt a bit to see the display */
+		napms(1000);	/* delayt a bit to see the display */
 	}
 
 	getch();		/* wait here */
