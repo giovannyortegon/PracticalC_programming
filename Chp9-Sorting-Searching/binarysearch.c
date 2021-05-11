@@ -3,6 +3,7 @@
 #define max 20
 
 int binary_search(int [], int, int);
+void print_arr(int arr[], int upper, int lower);
 
 int main()
 {
@@ -45,6 +46,14 @@ int binary_search(int arr[], int pnumb, int plen)
             else
                 uindex = mid - 1;
         }
+		print_arr(arr, uindex, lindex);
     }
     return (nfound);
+}
+void print_arr(int arr[], int upper, int lower)
+{
+	for (int i = lower; i <= upper; i++)
+		printf("%d ", arr[i]);
+
+	putchar('\n');
 }
