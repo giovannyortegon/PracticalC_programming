@@ -14,7 +14,7 @@ int main(void)
 	char * user = "root";
 	char * password = "toor";
 	char * database = "agenda";
-	char name[30], last_name[30], phone_number[11], sqlquery[255];
+	char name[30], last_name[30], phone_number[20], sqlquery[255];
 
 	conn = mysql_init(NULL);
 
@@ -48,7 +48,7 @@ int main(void)
 				scanf("%s", last_name);
 				printf("Ingrese telefono: ");
 				scanf("%s", phone_number);
-				strcpy(sqlquery, "INSERT INTO user(name, last_name,"
+				strcpy(sqlquery, "INSERT INTO users(name, last_name,"
 								" phone_number) VALUES (\'");
 				strcat(sqlquery, name);
 				strcat(sqlquery, "\', \'");
@@ -59,11 +59,15 @@ int main(void)
 
 				if (mysql_query(conn, sqlquery) != 0)
 				{
+					printf("************************\n");
 					fprintf(stderr, "Row could not be inserted into"
 									" users tables\n");
+					printf("************************\n");
 					break;
 				}
-				strcat(sqlquery, "\', \'");
+
+				printf("********** Inserted **********\n");
+
 			break;
 			case 3:
 			break;
@@ -72,20 +76,24 @@ int main(void)
 			case 5:
 				strcpy(sqlquery, "SELECT * FROM users");
 
-				resultset = mysql_store_result(conn);
 
 				if (mysql_query(conn, sqlquery) != 0)
 				{
-					fprintf(stderr, "No found users\n");
+					fprintf(stderr, "Error: No found users\n", );
 					break;
 				}
 
+				resultset = mysql_store_result(conn);
+
+				printf("************************\n");
 				while ((row = mysql_fetch_row(resultset)) != NULL)
 				{
-					printf("Nombre: %s ", row[0]);
-					printf("Apellido: %s ", row[1]);
-					printf("Telefono: %s\n", row[2]);
+					printf("ID: %s ", row[0]);
+					printf("Nombre: %s ", row[1]);
+					printf("Apellido: %s ", row[2]);
+					printf("Telefono: %s\n", row[3]);
 				}
+				printf("************************\n");
 				mysql_free_result(resultset);
 			break;
 			case 6:
