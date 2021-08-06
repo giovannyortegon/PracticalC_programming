@@ -1,1 +1,0 @@
-gcc $(ARG) -o main -I/usr/local/include/mysql -L/usr/local/lib/mysql -lmysqlclient
